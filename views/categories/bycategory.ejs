@@ -9,7 +9,7 @@
             </tr>
 
             <% for (let i=0; i < items.length; i++) { %>
-                <tr>
+                <tr  class="<%= items[i].DueDate < new Date() ? 'table-danger' : '' %>">
                     <td><%= items[i].Title %></td>
                     <td><%= items[i].CategoryName %></td>
                     <td><%= items[i].DueDate %></td>
