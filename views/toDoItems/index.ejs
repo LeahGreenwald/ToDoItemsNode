@@ -10,9 +10,8 @@
                 <th>Mark as Completed</th>
             </tr>
 
-
             <% for (let i=0; i < toDoItems.length; i++) { %>
-                <tr class="<%=(toDoItems[i].IsOverdue ? ' table-danger': '' )%>">
+                <tr>
                     <td>
                         <%= toDoItems[i].Title %>
                     </td>
@@ -24,15 +23,11 @@
                     </td>
                     <td>
 
-                        <!-- <a href="/todoitems/markascompleted?categoryId=<%=toDoItems[i].Id%>"
-                            class="btn btn-primary btn-block"
-                            type="post">
-                            Mark as completed
-                        </a> -->
                         <form method="post" action="/todoitems/markascompleted">
-                            <input type="hidden" name="categoryId" value=<%=toDoItems[i].Id%>/>
+                            <input type="hidden" name="categoryId" value="<%=toDoItems[i].Id%>" />
                             <button class="btn btn-primary btn-block">Mark as completed</button>
                         </form>
+                    </td>
                 </tr>
 
                 <%}%>
