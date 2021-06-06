@@ -1,0 +1,35 @@
+const router = require('express').Router();
+const categoriesDb = require('../db/categoriesDb');
+const toDoItemsDb = require('../db/toDoItemsDb');
+
+
+router.get('/', async (req, res) => {
+    const categories = await categoriesDb.getCategories();
+    res.render('categories/index', { categories });
+});
+
+router.get('/newcategory', async (req, res) => {
+    res.render('categories/newCategory');
+});
+
+router.post('/newcategory', async (req, res) => {
+    await categoriesDb.newCategory(req.body);
+    res.redirect('/categories');
+});
+
+router.get('/bycategory', async (req, res) => {
+    const items = await toDoItemsDb.getByCategory(req.query.id);
+    res.render('categories/bycategory', { items });
+});
+
+router.get('/editcategory', async (req, res) => {
+    const category = await categoriesDb.getCategoryName(req.query.id);
+    res.render('categories/editcategory', { category });
+});
+
+router.post('/updatecategory', async (req, res) => {
+    await categoriesDb.updateCategory(req.body);
+    res.redirect('/categories');
+});
+
+module.exports = router;

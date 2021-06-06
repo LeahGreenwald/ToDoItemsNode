@@ -1,13 +1,19 @@
 const router = require('express').Router();
 const toDoItemsDb = require('../db/toDoItemsDb');
+const categoriesDb = require('../db/categoriesDb');
 
 router.get('/', async (req, res) => {
     const toDoItems = await toDoItemsDb.getToDoItems();
     res.render('toDoItems/index', { toDoItems });
 });
 
+router.get('/completed', async (req, res) => {
+    const toDoItems = await toDoItemsDb.getCompletedToDoItems();
+    res.render('toDoItems/completed', { toDoItems });
+});
+
 router.get('/newitem', async (req, res) => {
-    const categories = await toDoItemsDb.getCategories();
+    const categories = await categoriesDb.getCategories();
     res.render('toDoItems/newitem', { categories });
 });
 
