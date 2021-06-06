@@ -1,0 +1,7 @@
+const router = require('express').Router();
+const toDoItemsDb = require('../db/toDoItemsDb');
+
+router.get('/', async (req, res) => {
+    const people = await toDoItemsDb.getToDoItems();
+    res.render('toDoItems/index', { toDoItems });
+});
