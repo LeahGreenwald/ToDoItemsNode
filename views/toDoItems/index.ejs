@@ -11,7 +11,7 @@
             </tr>
 
             <% for (let i=0; i < toDoItems.length; i++) { %>
-                <tr>
+                <tr  class="<%= toDoItems[i].DueDate < new Date() ? 'table-danger' : '' %>">
                     <td>
                         <%= toDoItems[i].Title %>
                     </td>
