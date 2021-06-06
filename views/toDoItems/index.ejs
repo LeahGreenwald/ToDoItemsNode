@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-8 offset-md-2">
-        <a href="/people/newitem" class="btn btn-success">New Item</a>
+        <a href="/todoitems/newitem" class="btn btn-success">New Item</a>
         <br />
         <table class="table table-hover table-striped table-bordered">
             <tr>
@@ -11,8 +11,8 @@
             </tr>
 
 
-            <% for (let i=0; i < toDoItems.length; i++)) { %>
-                <tr class="<%(item.IsOverdue ? " table-danger": "" )%>">
+            <% for (let i=0; i < toDoItems.length; i++) { %>
+                <tr class="<%=(toDoItems[i].IsOverdue ? ' table-danger': '' )%>">
                     <td>
                         <%= toDoItems[i].Title %>
                     </td>
@@ -20,10 +20,19 @@
                         <%= toDoItems[i].CategoryName %>
                     </td>
                     <td>
-                        <%= toDoItems[i]..DueDate.ToShortDateString() %>
+                        <%= toDoItems[i].DueDate %>
                     </td>
                     <td>
-                    <td> <a href='/people/markascompleted?id=<%= people[i].Id %>' class='btn btn-warning'>Edit</a></td>
+
+                        <!-- <a href="/todoitems/markascompleted?categoryId=<%=toDoItems[i].Id%>"
+                            class="btn btn-primary btn-block"
+                            type="post">
+                            Mark as completed
+                        </a> -->
+                        <form method="post" action="/todoitems/markascompleted">
+                            <input type="hidden" name="categoryId" value=<%=toDoItems[i].Id%>/>
+                            <button class="btn btn-primary btn-block">Mark as completed</button>
+                        </form>
                 </tr>
 
                 <%}%>
